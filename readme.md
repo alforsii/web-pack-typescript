@@ -208,8 +208,9 @@ Looks like everything ok, but no...Our app crashed :( :
 Why ?
 Well, if we read the error code it says `Can't resolve './form'...`, which means that our webpack doesn't know how to resolve the file that we're trying to import. Again to fix this we need to add to webpack.config.js file property :
 
-- ```resolve: {
-      extensions: [".ts", ".js"],
-    },
+- ```
+  resolve: {
+        extensions: [".ts", ".js"],
+      },
   ```
   Now if we restart the server since we update config file it should resolve the issue we had!
