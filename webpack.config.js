@@ -15,6 +15,10 @@ module.exports = {
       },
     ],
   },
+  // 6.
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
   // 2.Create output - end point
   output: {
     filename: "main.js",

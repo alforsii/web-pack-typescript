@@ -1,5 +1,7 @@
 # Steps
 
+## 1) Create basic webpack template to start
+
 ### 1. Install packages to begin with project
 
 ```
@@ -139,3 +141,75 @@ If we inspect our browser console we have our `console.log`: Hello Wold! This is
 #### 7. So far everything looks like working file, but if we make any changes in the index.ts our terminal shows that webpack is compiling but we don't see them in the browser, and it's not rebuilding our code into `main.js` anymore. It's because webpack-dev-server re-compiles TS file and stores resulting JS in memory, and does not put it in actual file. So, for that we need to modify our `webpack.config.js` file and tell webpack-rev-server where to put complied TS result :
 
 - add `publicPath: "public",` in output object in webpack.config.js
+
+## 2) So far everything is working fine. Lets start a little project to see what else we need to add to our webpack.config.js
+
+#### 1. Add following form to our main index.html file in public folder :
+
+```
+ <h2>Sign up</h2>
+    <form>
+      <label for="name">Your name</label>
+      <input type="text" id="name" required />
+      <label for="email">Your email</label>
+      <input type="email" id="email" required />
+      <label for="age">Your age</label>
+      <input type="number" id="age" required />
+      <button>submit</button>
+    </form>
+```
+
+#### 2. Create:
+
+- `form.ts` in src and copy paste following code into it:
+
+```
+export const formData = (form: HTMLFormElement) => {
+  const inputs = form.querySelectorAll("input");
+  let values: { [prop: string]: string } = {};
+
+  inputs.forEach((input) => {
+    values[input.id] = input.value;
+  });
+  return values;
+};
+
+// in JS code above looks something like this...
+
+// export const formData = (form) => {
+//   const inputs = form.querySelectorAll("input");
+//   let values = {};
+
+//   inputs.forEach((input) => {
+//     values[input.id] = input.value;
+//   });
+//   return values;
+// };
+```
+
+- Now lets import form from form.js:
+
+```
+import { formData } from "./form";
+
+const form = document.querySelector("form")!; // ! - means that this form definitely return a value which is not null, else TS gives use error
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = formData(form);
+  console.log("data", data);
+});
+```
+
+Looks like everything ok, but no...Our app crashed :( :
+
+`ERROR in ./src/index.ts Module not found: Error: Can't resolve './form' in '/Users/ashrafzhonkurbonaliev/Documents/my-github/web-pack-typescript/src' @ ./src/index.ts 1:0-34 5:17-25`
+
+Why ?
+Well, if we read the error code it says `Can't resolve './form'...`, which means that our webpack doesn't know how to resolve the file that we're trying to import. Again to fix this we need to add to webpack.config.js file property :
+
+- ```resolve: {
+      extensions: [".ts", ".js"],
+    },
+  ```
+  Now if we restart the server since we update config file it should resolve the issue we had!
