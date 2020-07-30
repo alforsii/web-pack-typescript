@@ -11,7 +11,7 @@ module.exports = merge(common, {
   output: {
     // publicPath: "public", // this is for webpack-dev-server to know where to put output(we should not use this if we're using HtmlWebpackPlugin plugin)
     path: path.resolve(__dirname, "public"), //from current dir to public folder
-    filename: "[name].main.js", //and then main.js
+    filename: "[name].bundle.js", //and then main.js
   },
   // 5.
   plugins: [
@@ -19,4 +19,20 @@ module.exports = merge(common, {
       template: path.resolve(__dirname, "src/index.html"),
     }),
   ],
+  module: {
+    rules: [
+      // 4. css rule
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        include: [path.resolve(__dirname, "src")],
+      },
+      // 5. scss rule
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+        include: [path.resolve(__dirname, "src")],
+      },
+    ],
+  },
 });

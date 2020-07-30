@@ -6,7 +6,10 @@ module.exports = {
   // mode: "development",
   // devtool: "eval-source-map",
   // 1.Create entry point
-  entry: "./src/index.ts",
+  entry: {
+    main: "./src/index.ts",
+    // you can add here more bundle JS files
+  },
   // 2.Create output for compiled TS file - end point
   // output: {
   //   // publicPath: "public", // this is for webpack-dev-server to know where to put output(we should not use this if we're using HtmlWebpackPlugin plugin)
@@ -28,18 +31,18 @@ module.exports = {
         // 3. Lets now restrict where to look for .ts files with 'include' to only 'src' path, else by default it will compile all .ts file from current directory
         include: [path.resolve(__dirname, "src")],
       },
-      // 4. css rule
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-        include: [path.resolve(__dirname, "src")],
-      },
-      // 5. scss rule
-      {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-        include: [path.resolve(__dirname, "src")],
-      },
+      // // 4. css rule
+      // {
+      //   test: /\.css$/,
+      //   use: ["style-loader", "css-loader"],
+      //   include: [path.resolve(__dirname, "src")],
+      // },
+      // // 5. scss rule
+      // {
+      //   test: /\.scss$/,
+      //   use: ["style-loader", "css-loader", "sass-loader"],
+      //   include: [path.resolve(__dirname, "src")],
+      // },
       // 6. html
       {
         test: /\.html/,

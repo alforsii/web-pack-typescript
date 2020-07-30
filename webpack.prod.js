@@ -3,6 +3,7 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.config");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(common, {
   mode: "production",
@@ -18,5 +19,21 @@ module.exports = merge(common, {
       template: path.resolve(__dirname, "src/index.html"),
     }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({ filename: "[name].contentHash.css" }),
   ],
+  module: {
+    rules: [
+      // 4. css rule
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        include: [path.resolve(__dirname, "src")],
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        include: [path.resolve(__dirname, "src")],
+      },
+    ],
+  },
 });

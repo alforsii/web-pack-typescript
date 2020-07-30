@@ -1,5 +1,5 @@
 import { formData } from "./form";
-import "./styles.css";
+import "./styles/style.scss";
 
 const form = document.querySelector("form")!; // ! - means that this form definitely return a value which is not null, else TS gives use error
 

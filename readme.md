@@ -257,3 +257,13 @@ Which cleans up our unused `main.[contentHash].js` files. Since we're using `Htm
 ```
 
 - Create webpack.dev and webpack.prod and separate configs for different environment.
+
+#### 9. Install mini-css-extract-plugin to separate style between dev and production
+
+```
+npm i -D mini-css-extract-plugin
+```
+
+- This plugin help us to inject styles into DOM before it gets loaded. It comes with it's own loader
+
+- We use this for production
