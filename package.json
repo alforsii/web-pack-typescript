@@ -1,11 +1,11 @@
 {
   "name": "web-pack-typescript",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --config webpack.config.js --open",
     "build": "webpack"
   },
   "repository": {
@@ -21,6 +21,13 @@
   "homepage": "https://github.com/alforsii/web-pack-typescript#readme",
   "dependencies": {},
   "devDependencies": {
+    "css-loader": "^4.1.0",
+    "file-loader": "^6.0.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",
     "webpack": "^4.44.0",

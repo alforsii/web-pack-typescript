@@ -214,3 +214,30 @@ Well, if we read the error code it says `Can't resolve './form'...`, which means
       },
   ```
   Now if we restart the server since we update config file it should resolve the issue we had!
+
+#### 3. Enable sourceMap for dev`s for debugging
+
+- enable `"sourceMap": true /* Generates corresponding '.map' file. */,` in tsconfig.json
+- add `devtool:"eval-source-map"` or `devtool:"source-map"` to webpack.config.js (recommended "eval-source-map" since it's quicker for development)
+
+#### 4. Add development mode in to webpack.config.js:
+
+`mode: "development",`
+
+#### 5. Add css,style,sass loaders and html-webpack-plugin to compile our style and html files dynamically to public folder
+
+```
+npm i style-loader css-loader html-webpack-plugin -D
+```
+
+- First `sass-loader` compiles styles into css
+- Secondly `css-loader` Translates CSS into CommonJS
+- Thirdly `style-loader` Creates `style` nodes from JS strings (injects compiled css files(into JS) into DOM.)
+
+#### 6. Add html-loader and file-loader in order to be able to select images from src folder
+
+```
+npm i html-loader file-loader -D
+```
+
+- As you can tell now `html-loader` compiles images from /src file into public folder.
