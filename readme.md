@@ -316,3 +316,26 @@ optimization: { minimizer:[] }
 ```
 
 this property in our webpack config file
+
+#### 11. And lastly add this to webpack.prod.js
+
+```
+   performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+    }
+```
+
+To remove this `WARNING` on console
+
+```
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets:
+  images/IMG_2612.JPG.ceee9a30d69810fb739d361f2fcfa44c.jpg (386 KiB)
+
+WARNING in webpack performance recommendations:
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+```

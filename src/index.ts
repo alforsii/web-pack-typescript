@@ -8,5 +8,4 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = formData(form);
   console.log("data", data);
-  console.log("data", data);
 });
