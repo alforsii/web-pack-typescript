@@ -4,6 +4,7 @@ const common = require("./webpack.config");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
@@ -15,11 +16,17 @@ module.exports = merge(common, {
   },
   // 5.
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "src/index.html"),
-    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: "[name].contentHash.css" }),
+    new OptimizeCssAssetsPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src/index.html"),
+      minify: {
+        removeComments: true,
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+      },
+    }),
   ],
   module: {
     rules: [

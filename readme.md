@@ -267,3 +267,52 @@ npm i -D mini-css-extract-plugin
 - This plugin help us to inject styles into DOM before it gets loaded. It comes with it's own loader
 
 - We use this for production
+
+#### 10. Install optimize-css-assets-webpack-plugin to minimize css file
+
+```
+npm i optimize-css-assets-webpack-plugin -D
+```
+
+By default minimizer set to terser-webpack-plugin. When we add :
+
+```
+optimization: {
+  minimizer: [ new OptimizeCssAssetsPlugin()]
+  },
+```
+
+OptimizeCssAssetsPlugin will be overriding JS minimizer terser-webpack-plugin. So we need to add this plugin to the list like so:
+
+```
+optimization: {
+  minimizer: [ new OptimizeCssAssetsPlugin(), new terser-webpack-plugin()]
+  },
+```
+
+Or we add `new OptimizeCssAssetsPlugin()` to our plugins and problem solved:
+
+```
+ plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({ filename: "[name].contentHash.css" }),
+    new OptimizeCssAssetsPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src/index.html"),
+      // Here we can add some rules for our html file
+      minify: {
+        removeComments: true,
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+      },
+    }),
+  ],
+```
+
+In this case no need to add `terser-webpack-plugin()` to the list, it's only overrides if we use :
+
+```
+optimization: { minimizer:[] }
+```
+
+this property in our webpack config file
