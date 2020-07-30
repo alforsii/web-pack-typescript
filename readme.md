@@ -295,7 +295,7 @@ Or we add `new OptimizeCssAssetsPlugin()` to our plugins and problem solved:
 ```
  plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: "[name].contentHash.css" }),
+    new MiniCssExtractPlugin({ filename: "[name].[contentHash].css" }),
     new OptimizeCssAssetsPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src/index.html"),
