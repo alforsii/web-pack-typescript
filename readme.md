@@ -241,3 +241,19 @@ npm i html-loader file-loader -D
 ```
 
 - As you can tell now `html-loader` compiles images from /src file into public folder.
+
+#### 7. Add clean-webpack-plugin
+
+```
+npm i clean-webpack-plugin
+```
+
+Which cleans up our unused `main.[contentHash].js` files. Since we're using `HtmlWebpackPlugin` and contentHash to get dynamic JS files into our compiled html file with uniq contentHash number.
+
+#### 8. Separate webpack.config into dev and prod configs
+
+```
+- npm i webpack-merge
+```
+
+- Create webpack.dev and webpack.prod and separate configs for different environment.
